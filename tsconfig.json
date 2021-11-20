@@ -11,13 +11,12 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "noUnusedLocals": true,
+    "strictNullChecks": true,
     "forceConsistentCasingInFileNames": true,
-    "types": [
-      "vite/client"
-    ],
     "paths": {
       "~/*": ["src/*"]
-    }
+    },
+    "jsx": "react-jsx"
   },
   "exclude": ["dist", "node_modules"]
 }
