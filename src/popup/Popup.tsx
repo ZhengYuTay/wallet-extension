@@ -1,8 +1,10 @@
-import WalletTokens from "~/views/WalletTokens";
+import WalletTokens from '~/views/WalletTokens'
 
 export const Popup = () => {
-  return <div>
+  return (
+    <div>
       Hey!
       <WalletTokens />
-  </div>;
-};
+    </div>
+  )
+}
