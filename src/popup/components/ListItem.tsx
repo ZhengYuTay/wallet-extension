@@ -16,7 +16,7 @@ const ListItem: React.FunctionComponent<ListItemProps> = ({ icon = '', title, ca
       {isIconComponent ? (
         <div className="avatar">
           <div className="rounded-full w-10">
-            <img src={icon || 'https://s3.us-east-2.amazonaws.com/nomics-api/static/images/currencies/BSV.png'} />
+            <img src={`${icon}` || 'https://s3.us-east-2.amazonaws.com/nomics-api/static/images/currencies/BSV.png'} />
           </div>
         </div>
       ) : (
