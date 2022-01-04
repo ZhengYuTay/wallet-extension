@@ -57,9 +57,11 @@
   },
   "dependencies": {
     "@solana/spl-token": "^0.1.8",
-    "@solana/spl-token-registry": "^0.2.361",
+    "@solana/spl-token-registry": "^0.2.1219",
     "@solana/web3.js": "^1.30.2",
     "buffer": "^6.0.3",
+    "jsbi": "^4.1.0",
+    "mathjs": "^10.0.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "webext-bridge": "^5.0.0",
