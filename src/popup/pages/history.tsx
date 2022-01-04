@@ -1,10 +1,6 @@
 import * as React from 'React'
 
-interface HistoryProps {
-  name: string
-}
-
-const History: React.FunctionComponent<HistoryProps> = ({ name }) => {
+const History: React.FunctionComponent = () => {
   return <div>History</div>
 }
 

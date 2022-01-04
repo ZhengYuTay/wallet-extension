@@ -1,11 +1,14 @@
-import "../styles";
-import React from "react";
-import ReactDOM from "react-dom";
-import { Popup } from "./Popup";
+import '../styles'
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { Popup } from './Popup'
+import { MemoryRouter } from 'react-router-dom'
 
 ReactDOM.render(
   <React.StrictMode>
-    <Popup />
+    <MemoryRouter initialEntries={['/wallet']}>
+      <Popup />
+    </MemoryRouter>
   </React.StrictMode>,
-  document.getElementById("root")
-);
+  document.getElementById('root')
+)
