@@ -11,6 +11,16 @@ export const MENU: Array<MenuProps> = [
     path: '/wallet'
   },
   {
+    name: 'Collection',
+    icon: 'collection',
+    path: '/collection'
+  },
+  {
+    name: 'Swap',
+    icon: 'swap',
+    path: '/swap'
+  },
+  {
     name: 'History',
     icon: 'history',
     path: '/history'

@@ -2,6 +2,7 @@ import * as React from 'react'
 import cn from 'classnames'
 import { MenuProps } from '~/constants/menu'
 import { NavLink } from 'react-router-dom'
+import Icon from '~/popup/components/Icon'
 
 interface BottomNavigationProps {
   menu: Array<MenuProps>
@@ -9,6 +10,8 @@ interface BottomNavigationProps {
 }
 
 const BottomNavigation: React.FunctionComponent<BottomNavigationProps> = ({ menu, children }) => {
+  const getIconColor = React.useCallback(({ hover }: { hover: Boolean }) => (hover ? 'white' : 'grey'), [])
+
   return (
     <>
       <div className="pb-14 h-full">{children}</div>
@@ -24,7 +27,7 @@ const BottomNavigation: React.FunctionComponent<BottomNavigationProps> = ({ menu
               })
             }
           >
-            {m.name}
+            <Icon name={m.icon} colorFn={getIconColor} />
           </NavLink>
         ))}
       </div>

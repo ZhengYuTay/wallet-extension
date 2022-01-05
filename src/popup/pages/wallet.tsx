@@ -32,7 +32,7 @@ const Wallet: React.FunctionComponent = () => {
             key={`coin_${index}`}
             title={coin.name}
             caption={coin.amount}
-            icon={<Coin size={10} />}
+            icon={<Coin />}
             onClick={() => goToToken(coin)}
           />
         ))}

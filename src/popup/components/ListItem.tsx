@@ -26,7 +26,7 @@ const ListItem: React.FunctionComponent<ListItemProps> = ({ icon = '', title, ca
         <p className="text-base truncate font-semibold">{title}</p>
         <p className="text-xs truncate text-slate-400">{caption}</p>
       </div>
-      <div className="flex-1 items-end">{rightSide}</div>
+      <div className="flex flex-1 items-center justify-end">{rightSide}</div>
     </div>
   )
 }
