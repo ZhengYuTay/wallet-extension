@@ -17,7 +17,7 @@ const Token: React.FunctionComponent = () => {
   return (
     <div className="flex flex-col px-6 py-8 h-full overflow-y-auto">
       <div className="flex flex-row items-center">
-        <Coin />
+        <Coin size={8} />
         <div className="text-lg ml-2">BTC</div>
         <div className="flex-1" />
         <div className="text-[0.6rem] rounded-lg bg-slate-50/20 text-slate-100 px-2 py-[0.1rem]">24H</div>

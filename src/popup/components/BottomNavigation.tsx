@@ -1,7 +1,6 @@
 import * as React from 'react'
-import cn from 'classnames'
 import { MenuProps } from '~/constants/menu'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useLocation } from 'react-router-dom'
 import Icon from '~/popup/components/Icon'
 
 interface BottomNavigationProps {
@@ -10,24 +9,30 @@ interface BottomNavigationProps {
 }
 
 const BottomNavigation: React.FunctionComponent<BottomNavigationProps> = ({ menu, children }) => {
-  const getIconColor = React.useCallback(({ hover }: { hover: Boolean }) => (hover ? 'white' : 'grey'), [])
+  const { pathname } = useLocation()
+
+  const getIconColor = React.useCallback(
+    ({ hover, path }: { hover: Boolean; path: string }) => {
+      if (pathname === path) {
+        return 'white'
+      }
+
+      return hover ? 'white' : 'grey'
+    },
+    [pathname]
+  )
 
   return (
     <>
       <div className="pb-14 h-full">{children}</div>
-      <div className="fixed flex flex-row justify-around align-center bg-gray-900 w-full bottom-0 h-14">
+      <div className="fixed flex flex-row justify-around align-center bg-slate-900 w-full bottom-0 h-14">
         {menu.map((m) => (
           <NavLink
             key={m.name}
             to={m.path}
-            className={({ isActive }) =>
-              cn('flex items-center justify-center h-full flex-1 cursor-pointer hover:text-white', {
-                'text-white font-semibold': isActive,
-                'text-slate-300': !isActive
-              })
-            }
+            className="flex items-center justify-center h-full flex-1 cursor-pointer hover:text-white"
           >
-            <Icon name={m.icon} colorFn={getIconColor} />
+            <Icon name={m.icon} colorFn={({ hover }: { hover: Boolean }) => getIconColor({ hover, path: m.path })} />
           </NavLink>
         ))}
       </div>

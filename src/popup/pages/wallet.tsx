@@ -12,6 +12,10 @@ const DUMMY_COINS: Array<any> = [...Array(10)].map((_, index) => ({
 const Wallet: React.FunctionComponent = () => {
   const navigate = useNavigate()
 
+  const goToSend = React.useCallback(() => {
+    navigate('/send')
+  }, [])
+
   const goToToken = React.useCallback((coin) => {
     navigate(`/wallet/${coin.id}`)
   }, [])
@@ -23,7 +27,9 @@ const Wallet: React.FunctionComponent = () => {
         <span className="text-red-700 text-base mt-2">-229.23</span>
         <div className="flex flex-row justify-center my-4">
           <button className="btn px-6 mx-2">Receive</button>
-          <button className="btn px-6 mx-2">Send</button>
+          <button className="btn px-6 mx-2" onClick={goToSend}>
+            Send
+          </button>
         </div>
       </div>
       <div className="flex flex-col mx-2 overflow-y-auto flex-1">
