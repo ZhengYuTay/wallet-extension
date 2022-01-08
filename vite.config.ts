@@ -13,7 +13,8 @@ export const sharedConfig: UserConfig = {
     }
   },
   define: {
-    __DEV__: isDev
+    __DEV__: isDev,
+    'process.env': {}
   },
   plugins: [
     // React fast refresh doesn't work, cause injecting of preambleCode into index.html

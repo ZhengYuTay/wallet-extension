@@ -1,3 +1,4 @@
+;(window as any).global = window
 import '../styles'
 import React from 'react'
 import ReactDOM from 'react-dom'
