@@ -10,7 +10,7 @@ const TRANSACTIONS = [...new Array(10)].map((_, index) => ({
 
 const History: React.FunctionComponent = () => {
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col h-full overflow-y-auto">
       <div className="text-[1rem] font-semibold text-slate-300 text-center pt-6 pb-10">Transaction History</div>
       <div className="flex flex-col px-4">
         {TRANSACTIONS.map((transaction, index) => (

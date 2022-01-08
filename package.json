@@ -65,6 +65,7 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-router-dom": "6",
+    "recharts": "^2.1.8",
     "webext-bridge": "^5.0.0",
     "webextension-polyfill": "^0.8.0"
   }
