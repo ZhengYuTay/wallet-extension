@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { MenuProps } from '~/constants/menu'
 import { NavLink, useLocation } from 'react-router-dom'
-import Icon from '~/popup/components/Icon'
+import Icon from '~/components/Icon'
 
 interface BottomNavigationProps {
   menu: Array<MenuProps>

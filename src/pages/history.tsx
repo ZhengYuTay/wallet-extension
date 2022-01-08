@@ -1,5 +1,5 @@
 import * as React from 'react'
-import ListItem from '~/popup/components/ListItem'
+import ListItem from '~/components/ListItem'
 import { truncateAddress } from '~/utils/coin'
 
 const TRANSACTIONS = [...new Array(10)].map((_, index) => ({

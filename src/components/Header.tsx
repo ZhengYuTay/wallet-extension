@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { useNavigate } from 'react-router-dom'
 import cn from 'classnames'
-import Icon from '~/popup/components/Icon'
+import Icon from '~/components/Icon'
 
 interface HeaderProps {
   title: string

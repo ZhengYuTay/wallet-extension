@@ -1,7 +1,12 @@
 module.exports = {
-  content: ["./src/popup/**/*.{tsx,ts}"],
+  content: ['./src/**/*.{tsx,ts}'],
   theme: {
-    extend: {},
+    extend: {}
   },
-  plugins: [require("daisyui")],
-};
+  safelist: [
+    {
+      pattern: /(w|h)-(.*)/
+    }
+  ],
+  plugins: [require('daisyui')]
+}

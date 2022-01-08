@@ -1,8 +1,8 @@
 import * as React from 'react'
 import { useParams } from 'react-router-dom'
 import { Line, LineChart, ResponsiveContainer } from 'recharts'
-import Coin from '~/popup/components/Coin'
-import ListItem from '~/popup/components/ListItem'
+import Coin from '~/components/Coin'
+import ListItem from '~/components/ListItem'
 import { truncateAddress } from '~/utils/coin'
 import { convertRemToPixels } from '~/utils/style'
 

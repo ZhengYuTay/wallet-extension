@@ -1,8 +1,8 @@
 import * as React from 'react'
-import Header from '~/popup/components/Header'
-import Input from '~/popup/components/Input'
-import Icon from '~/popup/components/Icon'
-import ListItem from '~/popup/components/ListItem'
+import Header from '~/components/Header'
+import Input from '~/components/Input'
+import Icon from '~/components/Icon'
+import ListItem from '~/components/ListItem'
 
 const FUNDS = [...new Array(10)].map((fund) => ({
   icon: null,

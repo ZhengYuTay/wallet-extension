@@ -1,13 +1,13 @@
 import { Route, Routes } from 'react-router-dom'
-import BottomNavigation from '~/popup/components/BottomNavigation'
-import { NavigationProvider } from '~/popup/contexts/navigation'
+import BottomNavigation from '~/components/BottomNavigation'
+import { NavigationProvider } from '~/contexts/navigation'
 import { MENU } from '~/constants/menu'
-import Wallet from '~/popup/pages/wallet'
-import History from '~/popup/pages/history'
-import Collection from '~/popup/pages/collection'
-import Token from '~/popup/pages/token'
-import Swap from '~/popup/pages/swap'
-import Send from '~/popup/pages/send'
+import Wallet from '~/pages/wallet'
+import History from '~/pages/history'
+import Collection from '~/pages/collection'
+import Token from '~/pages/token'
+import Swap from '~/pages/swap'
+import Send from '~/pages/send'
 
 interface ProviderProps {
   children: React.ReactElement
