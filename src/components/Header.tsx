@@ -36,7 +36,9 @@ const Header: React.FunctionComponent<HeaderProps> = ({
             onClick={goBack}
           />
         )}
-        <div className={cn('text-[1rem] text-semibold text-slate-300 w-full text-center', textClassName)}>{title}</div>
+        <div className={cn('text-[1rem] text-semibold text-slate-300 w-full text-center', textClassName)}>
+          {title || 'Header'}
+        </div>
       </div>
       {children}
     </div>

@@ -24,8 +24,11 @@ const BottomNavigation: React.FunctionComponent<BottomNavigationProps> = ({ menu
 
   return (
     <>
-      <div className="pb-14 h-full">{children}</div>
-      <div className="fixed flex flex-row justify-around align-center bg-slate-900 w-full bottom-0 h-14">
+      <div className="pb-14 h-full bg-[#282830] relative">
+        <div className="absolute right-0 bg-[#6CCDE2] bg-opacity-90 blur-[100px] h-[50px] -left-5"></div>
+        {children}
+      </div>
+      <div className="fixed flex flex-row justify-around align-center bg-[rgba(72,72,75,0.8)] w-full bottom-0 h-14">
         {menu.map((m) => (
           <NavLink
             key={m.name}
