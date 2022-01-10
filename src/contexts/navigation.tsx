@@ -1,7 +1,12 @@
 import * as React from 'react'
 import { MENU } from '~/constants/menu'
 
-const NavigationContext = React.createContext<any>(null)
+type NavigationContextState = {
+  activeMenu: string
+  setActiveMenu: (menu: string) => void
+} | null
+
+const NavigationContext = React.createContext<NavigationContextState>(null)
 
 const NavigationProvider = ({ children }: { children: React.ReactChild }) => {
   const [activeMenu, setActiveMenu] = React.useState(MENU[0].name)
