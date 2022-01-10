@@ -3,6 +3,7 @@ import { defineConfig, UserConfig } from 'vite'
 import AutoImport from 'unplugin-auto-import/vite'
 import { r, port, isDev } from './scripts/utils'
 import react from '@vitejs/plugin-react'
+import viteSvgIcons from 'vite-plugin-svg-icons'
 
 export const sharedConfig: UserConfig = {
   root: r('src'),
@@ -36,7 +37,14 @@ export const sharedConfig: UserConfig = {
       transformIndexHtml(html, { path }) {
         return html.replace(/"\/assets\//g, `"${relative(dirname(path), '/assets')}/`)
       }
-    }
+    },
+
+    viteSvgIcons({
+      // Specify the icon folder to be cached
+      iconDirs: [r(process.cwd(), 'src/icons')],
+      // Specify symbolId format
+      symbolId: 'icon-[name]'
+    })
   ],
   optimizeDeps: {
     include: ['webextension-polyfill']
