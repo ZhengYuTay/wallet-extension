@@ -1,9 +1,8 @@
-;(window as any).global = window
-import '../styles'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Popup } from './Popup'
 import { MemoryRouter } from 'react-router-dom'
+import '../styles'
 
 import 'virtual:svg-icons-register'
 
