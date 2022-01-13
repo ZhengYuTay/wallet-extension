@@ -52,7 +52,6 @@ const GRAPH_DATA = [
 
 const Token: React.FunctionComponent = () => {
   const { id } = useParams()
-  console.log('🚀 ~ file: token.tsx ~ line 7 ~ id', id)
 
   return (
     <div className="flex flex-col px-6 py-8 h-full overflow-y-auto">

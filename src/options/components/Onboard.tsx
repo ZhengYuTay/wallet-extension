@@ -19,8 +19,6 @@ const Onboard = () => {
       return
     }
 
-    console.log('test')
-
     setStep((prevStep) => prevStep - 1)
   }, [step, navigate])
 
