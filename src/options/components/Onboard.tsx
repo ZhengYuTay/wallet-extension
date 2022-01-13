@@ -30,7 +30,7 @@ const Onboard = () => {
 
   return (
     <>
-      <div className="flex flex-row justify-center items-center relative h-12">
+      <div className="flex flex-row justify-center items-center relative h-14">
         <Icon
           name="back"
           className="absolute left-4 cursor-pointer"
