@@ -4,7 +4,6 @@ import { Line, LineChart, ResponsiveContainer } from 'recharts'
 import Coin from '~/components/Coin'
 import ListItem from '~/components/ListItem'
 import { truncateAddress } from '~/utils/coin'
-import { convertRemToPixels } from '~/utils/style'
 
 const ACTIVITIES = [...new Array(10)].map((_, index) => ({
   title: 'Swap via Jupiter',
