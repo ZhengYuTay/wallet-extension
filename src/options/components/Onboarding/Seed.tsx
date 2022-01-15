@@ -1,5 +1,6 @@
 import React from 'react'
 import ClipboardJS from 'clipboard'
+import Title from '../Title'
 interface SeedProps {
   onNext: () => void
 }
@@ -24,10 +25,7 @@ const Seed: React.FC<SeedProps> = ({ onNext }) => {
 
   return (
     <>
-      <div className="text-2xl text-semibold">Secret Recovery Phrase</div>
-      <div className="text-base text-slate-400 mt-2">
-        This is the only way you will be able to recover your account. Please store it somewhere safe!
-      </div>
+      <Title title="Secret Recovery Phrase" caption='This is the only way you will be able to recover your account. Please store it somewhere safe!' />
       <div className="bg-slate-500 p-4 relative rounded-md mt-6">
         <div className="text-lg" id="seed">
           drip marriage celery half squirrel abuse music ceiling hand diesel evolve someone

@@ -1,6 +1,7 @@
 import React from 'react'
 import Checkbox from '~/components/Checkbox'
 import Input from '~/components/Input'
+import Title from './Title'
 
 interface PasswordProps {
   onNext: () => void
@@ -9,8 +10,7 @@ interface PasswordProps {
 const Password: React.FC<PasswordProps> = ({ onNext }) => {
   return (
     <>
-      <div className="text-2xl text-semibold">Create a password</div>
-      <div className="text-base text-slate-400 mt-2">You will use this to unlock your wallet</div>
+      <Title title="Create a password" caption="You will use this to unlock your wallet" />
       <div className="space-y-2 w-full mt-4">
         <Input className="w-full self-center" placeholder="Password" secureEntry />
         <Input className="w-full self-center" placeholder="Confirm Password" secureEntry />

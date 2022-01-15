@@ -8,6 +8,10 @@ const Landing: React.FC = () => {
     navigate('/onboard')
   }, [navigate])
 
+  const goToRecovery = React.useCallback(() => {
+    navigate('/recovery')
+  }, [])
+
   return (
     <div className="card-body h-full flex flex-col justify-between">
       <div className="card-title flex flex-1 flex-col justify-center items-center space-y-3 mt-10">
@@ -24,7 +28,9 @@ const Landing: React.FC = () => {
         <button className="btn btn-primary btn-block" onClick={goToOnboard}>
           Create New Wallet
         </button>
-        <button className="btn btn-block">Use Secret Recovery Phrase</button>
+        <button className="btn btn-block" onClick={goToRecovery}>
+          Use Secret Recovery Phrase
+        </button>
       </div>
     </div>
   )

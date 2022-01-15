@@ -1,12 +1,13 @@
-import * as React from 'react'
+import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import Icon from '~/components/Icon'
 import Stepper from '~/components/Stepper'
-import Complete from './Complete'
-import Password from './Password'
+import Complete from '../Complete'
+import Account from './Accounts'
+import Password from '../Password'
 import Seed from './Seed'
 
-const Onboard = () => {
+const Recovery: React.FC = () => {
   const navigate = useNavigate()
 
   const stepperRef = React.useRef<any>()
@@ -26,6 +27,10 @@ const Onboard = () => {
     setStep((prevStep) => prevStep + 1)
   }, [])
 
+  React.useEffect(() => {
+    stepperRef.current.setStep(step)
+  }, [step])
+
   return (
     <>
       <div className="flex flex-row justify-center items-center relative h-14">
@@ -35,15 +40,16 @@ const Onboard = () => {
           colorFn={({ hover }: { hover: Boolean }) => (hover ? 'white' : 'grey')}
           onClick={goBack}
         />
-        <Stepper steps={3} ref={stepperRef} />
+        <Stepper steps={4} ref={stepperRef} />
       </div>
       <div className="p-8 flex flex-col items-center h-full">
         {step === 0 && <Seed onNext={onNext} />}
-        {step === 1 && <Password onNext={onNext} />}
-        {step === 2 && <Complete onNext={onNext} />}
+        {step === 1 && <Account onNext={onNext} />}
+        {step === 2 && <Password onNext={onNext} />}
+        {step === 3 && <Complete onNext={onNext} />}
       </div>
     </>
   )
 }
 
-export default Onboard
+export default Recovery
