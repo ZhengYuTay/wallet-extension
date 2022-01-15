@@ -1,3 +1,4 @@
+import Drawer from '~/components/Drawer'
 import { NavigationProvider } from '~/contexts/navigation'
 import Routes from './routes'
 
@@ -13,7 +14,10 @@ export const Popup = () => {
   return (
     <Providers>
       <div className="w-[22rem] h-[32rem]">
-        <Routes />
+        <Drawer />
+        <div className='pt-10 h-full'>
+          <Routes />
+        </div>
       </div>
     </Providers>
   )
