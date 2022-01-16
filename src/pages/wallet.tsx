@@ -21,7 +21,7 @@ const Wallet: React.FunctionComponent = () => {
   }, [])
 
   return (
-    <div className="flex flex-col text-center align-center pt-10 h-full">
+    <div className="flex flex-col text-center align-center h-full">
       <div className="px-10 flex flex-col space-y-2 mb-4">
         <span className="text-md">Account 1</span>
         <span className="text-4xl">$3,575.24</span>
