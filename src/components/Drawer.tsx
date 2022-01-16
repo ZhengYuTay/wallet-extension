@@ -20,21 +20,21 @@ const Drawer: React.FC = () => {
 
             <div className="drawer-side h-screen">
                 <label htmlFor="my-drawer" className="drawer-overlay z-10 cursor-default" />
-                <ul className="menu p-4 overflow-y-auto w-3/6 bg-base-100 text-base-content z-20">
+                <ul className="menu p-4 overflow-y-auto w-3/6 bg-base-100 text-base-content">
                     <li>
-                        <a>Menu Item</a>
+                        <a>Wallet 1</a>
                     </li>
                     <li>
-                        <a>Menu Item</a>
+                        <a>Wallet 2</a>
                     </li>
                     <li>
-                        <a>Menu Item</a>
+                        <a>Wallet 3</a>
                     </li>
                     <li>
-                        <a>Menu Item</a>
+                        <a>Wallet 4</a>
                     </li>
                     <li>
-                        <a>Menu Item</a>
+                        <a>Wallet 5</a>
                     </li>
                 </ul>
             </div>
