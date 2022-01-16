@@ -7,14 +7,24 @@ interface InputProps {
   suffix?: React.ReactNode
   placeholder?: string
   value?: string
+  secureEntry?: Boolean
   onChange?: React.ChangeEventHandler<HTMLInputElement>
 }
 
-const Input: React.FunctionComponent<InputProps> = ({ className, prefix, suffix, placeholder, value, onChange }) => {
+const Input: React.FunctionComponent<InputProps> = ({
+  className,
+  prefix,
+  suffix,
+  placeholder,
+  secureEntry = false,
+  value,
+  onChange
+}) => {
   return (
     <div className={cn('flex flex-row px-2 py-4 rounded bg-slate-900', className)}>
       {prefix}
       <input
+        type={secureEntry ? 'password' : 'text'}
         className={cn('bg-transparent text-md outline-none w-full', {
           'ml-4': !!prefix,
           'mr-4': !!suffix

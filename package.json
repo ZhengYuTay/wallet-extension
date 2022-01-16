@@ -60,12 +60,13 @@
     "web-ext": "^6.4.0"
   },
   "dependencies": {
-    "classnames": "^2.3.1",
-    "daisyui": "^1.21.0",
     "@solana/spl-token": "^0.1.8",
     "@solana/spl-token-registry": "^0.2.1219",
     "@solana/web3.js": "^1.30.2",
     "buffer": "^6.0.3",
+    "classnames": "^2.3.1",
+    "clipboard": "^2.0.8",
+    "daisyui": "^1.21.0",
     "jsbi": "^4.1.0",
     "mathjs": "^10.0.2",
     "react": "^17.0.2",
