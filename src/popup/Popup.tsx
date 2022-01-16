@@ -15,9 +15,7 @@ export const Popup = () => {
     <Providers>
       <div className="w-[22rem] h-[32rem]">
         <Drawer />
-        <div className='pt-10 h-full'>
-          <Routes />
-        </div>
+        <Routes />
       </div>
     </Providers>
   )
