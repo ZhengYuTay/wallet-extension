@@ -60,8 +60,8 @@ const Wallet: React.FunctionComponent = () => {
 
             return <ListItem
               key={`token_${index}`}
-              title={tokenInfo.symbol}
-              caption={uiAmount.toString()}
+              title={tokenInfo.name}
+              caption={`${uiAmount} ${tokenInfo.symbol}`}
               icon={<Coin icon={tokenInfo.logoURI} />}
               onClick={() => goToToken(mint)}
             />
