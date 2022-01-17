@@ -6,16 +6,14 @@ const Drawer: React.FC = () => {
 		<div className="shadow drawer bg-[#282830]">
 			<input id="my-drawer" type="checkbox" className="drawer-toggle" />
 
-			<div className="flex flex-col w-screen">
-				<div className="w-full p-4 border-b border-slate-700">
-					<label htmlFor="my-drawer" className="btn-primary drawer-button">
-						<Icon
-							className="cursor-pointer"
-							name="drawer"
-							colorFn={({ hover }: { hover: Boolean }) => (hover ? 'white' : 'grey')}
-						/>
-					</label>
-				</div>
+			<div className="px-4 pt-4 pb-8 border-b border-slate-700">
+				<label htmlFor="my-drawer" className="btn-primary drawer-button">
+					<Icon
+						className="cursor-pointer absolute"
+						name="drawer"
+						colorFn={({ hover }: { hover: Boolean }) => (hover ? 'white' : 'grey')}
+					/>
+				</label>
 			</div>
 
 			<div className="drawer-side">
