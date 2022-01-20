@@ -27,7 +27,7 @@ const Header: React.FunctionComponent<HeaderProps> = ({
 
   return (
     <div className="flex flex-col" {...props}>
-      <div className={cn('flex flex-row px-4 py-6', className)}>
+      <div className={cn('flex flex-row p-4', className)}>
         {back && (
           <Icon
             name="back"
