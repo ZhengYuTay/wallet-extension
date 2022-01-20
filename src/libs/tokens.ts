@@ -1,11 +1,11 @@
-import { TOKEN_PROGRAM_ID, AccountInfo as TokenAccountInfo, AccountLayout, u64 } from "@solana/spl-token";
-import { AccountInfo, Connection, PublicKey } from "@solana/web3.js";
+import { TOKEN_PROGRAM_ID, AccountInfo as TokenAccountInfo, AccountLayout, u64 } from '@solana/spl-token'
+import { AccountInfo, Connection, PublicKey } from '@solana/web3.js'
 
 export interface TokenAccount {
   pubkey: PublicKey
   account: AccountInfo<Buffer>
   info: TokenAccountInfo
-};
+}
 
 const deserializeAccount = (data: Buffer): TokenAccountInfo => {
   const accountInfo = AccountLayout.decode(data)
@@ -57,14 +57,23 @@ export const tokenAccountParser = (pubKey: PublicKey, info: AccountInfo<Buffer>)
 }
 
 export async function getWalletTokens(connection: Connection, wallet: PublicKey) {
-  const pas = (await connection.getTokenAccountsByOwner(wallet, {
-    programId: TOKEN_PROGRAM_ID
-  })).value;
+  const pas = (
+    await connection.getTokenAccountsByOwner(wallet, {
+      programId: TOKEN_PROGRAM_ID
+    })
+  ).value
 
   // TODO: Figure out what to do with non ATA
-  return pas.reduce((tokenAccounts, {pubkey, account}) => {
-    const tokenAccount = tokenAccountParser(pubkey, account);
-    tokenAccounts.push(tokenAccount);
-    return tokenAccounts;
-  }, new Array<TokenAccount>());
+  return pas.reduce((tokenAccounts, { pubkey, account }) => {
+    const tokenAccount = tokenAccountParser(pubkey, account)
+    tokenAccounts.push(tokenAccount)
+    return tokenAccounts
+  }, new Array<TokenAccount>())
+}
+
+export async function getRecentTransactions(connection: Connection, wallet: PublicKey) {
+  // TODO: be smarter and identifty if a transaction is just a withdraw / deposit or other activty in solana
+  const transactions = await connection.getSignaturesForAddress(wallet)
+
+  return transactions
 }

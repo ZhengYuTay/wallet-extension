@@ -23,7 +23,7 @@ const ListItem: React.FunctionComponent<ListItemProps> = ({ icon = '', title, ca
         <>{icon}</>
       )}
       <div className="flex flex-col justify-between items-start ml-4">
-        <p className="text-base truncate font-semibold text-slate-400">{title}</p>
+        <p className="text-base truncate font-semibold text-slate-400 my-auto">{title}</p>
         {caption && <p className="text-xs truncate text-slate-400">{caption}</p>}
       </div>
       <div className="flex flex-1 items-center justify-end">{rightSide}</div>
