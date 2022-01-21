@@ -6,9 +6,11 @@ import ListItem from '~/components/ListItem'
 import useWeb3 from '~/hooks/useWeb3'
 import { tokenAmountToUiTokenAmount } from '~/utils/coin'
 import Coin from '~/components/Coin'
+import { useNavigate } from 'react-router-dom'
 
 const Send: React.FunctionComponent = () => {
   const { tokenInfoAccounts } = useWeb3()
+  const navigate = useNavigate()
 
   const [search, setSearch] = React.useState<string>('')
 
@@ -22,6 +24,10 @@ const Send: React.FunctionComponent = () => {
 
   const onSearch = React.useCallback((evt) => {
     setSearch(evt.target.value)
+  }, [])
+
+  const goToSendToken = React.useCallback((mint) => {
+    navigate(`/send/${mint}`)
   }, [])
 
   return (
@@ -48,6 +54,7 @@ const Send: React.FunctionComponent = () => {
                   tokenInfo.token?.decimals ?? 0
                 )}`}</div>
               }
+              onClick={() => goToSendToken(tokenInfo.info.mint.toBase58())}
             />
           ))}
         </div>
