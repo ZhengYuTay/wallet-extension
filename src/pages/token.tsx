@@ -1,15 +1,13 @@
+import { PublicKey } from '@solana/web3.js'
+import { formatDistanceToNowStrict } from 'date-fns'
 import * as React from 'react'
 import { useParams } from 'react-router-dom'
 import { Line, LineChart, ResponsiveContainer } from 'recharts'
 import Coin from '~/components/Coin'
 import ListItem from '~/components/ListItem'
+import TransactionIcon from '~/components/TransactionIcon'
+import useWeb3 from '~/hooks/useWeb3'
 import { truncateAddress } from '~/utils/coin'
-
-const ACTIVITIES = [...new Array(10)].map((_, index) => ({
-  title: 'Swap via Jupiter',
-  address: 'bc1qrp33g0q5c5txsp9arysrx4k6zdkfs4nce4xj0gdcccefvpysxf3qccfmv3',
-  timestamp: '35m'
-}))
 
 const GRAPH_DATA = [
   {
@@ -52,11 +50,20 @@ const GRAPH_DATA = [
 const Token: React.FunctionComponent = () => {
   const { id } = useParams()
 
+  if (!id) {
+    return <div className="flex flex-col">Something went wrong!</div>
+  }
+
+  const { tokenMap } = useWeb3()
+  const { transactions } = useWeb3(new PublicKey(id))
+
+  const tokenInfo = React.useMemo(() => tokenMap.get(id), [tokenMap, id])
+
   return (
-    <div className="flex flex-col px-6 py-8 h-full overflow-y-auto">
+    <div className="flex flex-col px-6 py-8 pt-2 h-full overflow-y-auto">
       <div className="flex flex-row items-center">
-        <Coin size={8} />
-        <div className="text-lg ml-2">BTC</div>
+        <Coin icon={tokenInfo?.logoURI} size={8} />
+        <div className="text-lg ml-2">{tokenInfo?.symbol}</div>
         <div className="flex-1" />
         <div className="text-[0.6rem] rounded-lg bg-slate-50/20 text-slate-100 px-2 py-[0.1rem]">24H</div>
       </div>
@@ -71,13 +78,23 @@ const Token: React.FunctionComponent = () => {
       </ResponsiveContainer>
       <div className="text-[1rem] text-slate-300 mt-2">Recent Activity</div>
       <div className="flex flex-col">
-        {ACTIVITIES.map((activity, index) => (
-          <ListItem
-            key={`activity_${index}`}
-            title={activity.title}
-            caption={truncateAddress(activity.address)}
-            rightSide={<div className="text-right text-md text-slate-400">{activity.timestamp}</div>}
-          />
+        {transactions?.map((transaction) => (
+          <a
+            key={transaction.signature}
+            href={`https://solscan.io/tx/${transaction.signature}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <ListItem
+              icon={<TransactionIcon type={transaction.err ? 'fail' : 'success'} />}
+              title={truncateAddress(transaction.signature)}
+              rightSide={
+                <div className="text-right text-md text-slate-400">
+                  {transaction.blockTime ? formatDistanceToNowStrict(transaction.blockTime * 1000) : '-'}
+                </div>
+              }
+            />
+          </a>
         ))}
       </div>
     </div>

@@ -2,39 +2,20 @@ import * as React from 'react'
 import { useNavigate } from 'react-router-dom'
 import Coin from '~/components/Coin'
 import ListItem from '~/components/ListItem'
-import { ENV, TokenInfo, TokenListProvider } from '@solana/spl-token-registry'
 import useWeb3 from '~/hooks/useWeb3'
 import { tokenAmountToUiTokenAmount } from '~/utils/coin'
 
 const Wallet: React.FunctionComponent = () => {
   const navigate = useNavigate()
-  const { tokenAccounts } = useWeb3()
-
-  const [tokenMap, setTokenMap] = React.useState<Map<string, TokenInfo>>()
-
-  const getTokensMap = React.useCallback(async () => {
-    const tokens = await new TokenListProvider().resolve()
-    const tokenList = tokens.filterByChainId(ENV.MainnetBeta).getList()
-
-    setTokenMap(
-      tokenList.reduce((map, item) => {
-        map.set(item.address, item)
-        return map
-      }, new Map())
-    )
-  }, [setTokenMap])
+  const { tokenAccounts, tokenMap } = useWeb3()
 
   const goToSend = React.useCallback(() => {
     navigate('/send')
   }, [])
 
-  const goToToken = React.useCallback((coin) => {
-    navigate(`/wallet/${coin.id}`)
+  const goToToken = React.useCallback((mint) => {
+    navigate(`/wallet/${mint}`)
   }, [])
-
-  React.useEffect(() => {
-    getTokensMap()
-  }, [getTokensMap])
 
   return (
     <div className="flex flex-col text-center align-center h-full">
@@ -61,7 +42,7 @@ const Wallet: React.FunctionComponent = () => {
                 title={tokenInfo?.symbol}
                 caption={tokenAmountToUiTokenAmount(amount, decimals)}
                 icon={<Coin icon={tokenInfo?.logoURI} />}
-                onClick={() => goToToken(mint)}
+                onClick={() => goToToken(mint.toBase58())}
               />
             )
           })}

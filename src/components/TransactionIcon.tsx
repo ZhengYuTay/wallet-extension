@@ -15,7 +15,7 @@ const TransactionIcon: React.FunctionComponent<ITransactionIconProps> = ({ type 
       })}
     >
       <Icon
-        name="icon-swap"
+        name="swap"
         colorFn={() => {
           return type === 'success' ? '#26E97E' : '#F64A4A'
         }}
