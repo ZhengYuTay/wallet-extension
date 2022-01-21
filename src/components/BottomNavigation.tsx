@@ -24,7 +24,7 @@ const BottomNavigation: React.FunctionComponent<BottomNavigationProps> = ({ menu
 
   return (
     <>
-      <div className="pb-14 h-full bg-[#282830] relative pt-4">
+      <div className="pb-14 h-full bg-[#282830] relative">
         <div className="absolute right-0 bg-[#6CCDE2] bg-opacity-90 blur-[100px] h-[50px] -left-5"></div>
         {children}
       </div>
