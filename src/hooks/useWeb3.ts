@@ -9,6 +9,7 @@ const MAIN_PUBLIC_KEY = new PublicKey('9zg3seAh4Er1Nz8GAuiciH437apxtzgUWBT8frhud
 interface Web3Props {
   connection: Connection
   tokenAccounts: TokenAccount[] | undefined
+  tokenInfoAccounts: Array<{ token: TokenInfo | undefined } & TokenAccount> | undefined
   transactions: ConfirmedSignatureInfo[] | undefined
   tokenMap: Map<string, TokenInfo>
 }
@@ -22,6 +23,11 @@ const useWeb3 = (wallet: PublicKey | undefined = MAIN_PUBLIC_KEY): Web3Props => 
     async () => {
       return getRecentTransactions(connection, wallet)
     }
+  )
+
+  const tokenInfoAccounts = React.useMemo(
+    () => tokenAccounts?.map((account) => ({ token: tokenMap.get?.(account.info.mint.toBase58()), ...account })) ?? [],
+    [tokenAccounts, tokenMap]
   )
 
   const getTokensMap = React.useCallback(async () => {
@@ -48,7 +54,7 @@ const useWeb3 = (wallet: PublicKey | undefined = MAIN_PUBLIC_KEY): Web3Props => 
     getTokensMap()
   }, [getTokensMap])
 
-  return { connection: clusterConnection, tokenAccounts, transactions, tokenMap }
+  return { connection: clusterConnection, tokenAccounts, tokenInfoAccounts, transactions, tokenMap }
 }
 
 export default useWeb3
