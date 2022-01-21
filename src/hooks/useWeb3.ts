@@ -6,10 +6,13 @@ import { useQuery } from 'react-query'
 
 const connection = new Connection(clusterApiUrl('mainnet-beta'))
 const MAIN_PUBLIC_KEY = new PublicKey('9zg3seAh4Er1Nz8GAuiciH437apxtzgUWBT8frhudevR')
+
+export type TokenInfoAccount = { token: TokenInfo | undefined } & TokenAccount
+
 interface Web3Props {
   connection: Connection
   tokenAccounts: TokenAccount[] | undefined
-  tokenInfoAccounts: Array<{ token: TokenInfo | undefined } & TokenAccount> | undefined
+  tokenInfoAccounts: Array<TokenInfoAccount> | undefined
   transactions: ConfirmedSignatureInfo[] | undefined
   tokenMap: Map<string, TokenInfo>
 }

@@ -9,6 +9,7 @@ interface InputProps {
   value?: string
   secureEntry?: Boolean
   onChange?: React.ChangeEventHandler<HTMLInputElement>
+  [x: string]: any
 }
 
 const Input: React.FunctionComponent<InputProps> = ({
@@ -18,7 +19,8 @@ const Input: React.FunctionComponent<InputProps> = ({
   placeholder,
   secureEntry = false,
   value,
-  onChange
+  onChange,
+  ...props
 }) => {
   return (
     <div className={cn('flex flex-row px-2 py-4 rounded bg-slate-900', className)}>
@@ -32,6 +34,7 @@ const Input: React.FunctionComponent<InputProps> = ({
         placeholder={placeholder ?? 'Placeholder here'}
         defaultValue={value ?? ''}
         onChange={onChange}
+        {...props}
       />
       {suffix}
     </div>
