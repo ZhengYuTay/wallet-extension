@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom'
 import Coin from '~/components/Coin'
 import ListItem from '~/components/ListItem'
 import useWeb3 from '~/hooks/useWeb3'
-import { tokenAmountToUiTokenAmount } from '~/utils/coin'
 
 const Wallet: React.FunctionComponent = () => {
   const navigate = useNavigate()
@@ -38,7 +37,7 @@ const Wallet: React.FunctionComponent = () => {
             <ListItem
               key={`token_${index}`}
               title={tokenInfo.token?.symbol ?? 'N/A'}
-              caption={tokenAmountToUiTokenAmount(tokenInfo.info.amount ?? 0, decimals)}
+              caption={`${tokenInfo.balance}`}
               icon={<Coin icon={tokenInfo?.token?.logoURI} />}
               onClick={() => goToToken(tokenInfo.info.mint.toBase58())}
             />
