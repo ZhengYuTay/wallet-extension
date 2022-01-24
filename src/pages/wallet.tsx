@@ -31,8 +31,6 @@ const Wallet: React.FunctionComponent = () => {
       </div>
       <div className="flex flex-col mx-2 overflow-y-auto flex-1">
         {tokenInfoAccounts?.map((tokenInfo, index) => {
-          const decimals = tokenInfo.token?.decimals ?? 0
-
           return (
             <ListItem
               key={`token_${index}`}
