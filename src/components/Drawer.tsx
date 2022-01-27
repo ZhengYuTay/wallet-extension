@@ -1,7 +1,12 @@
 import React from 'react';
 import Icon from './Icon';
+import { sendMessage } from 'webext-bridge';
 
 const Drawer: React.FC = () => {
+	const connectWallet = React.useCallback (() => {
+		sendMessage('connect-wallet', undefined);
+	  }, [])
+
 	return (
 		<div className="shadow drawer bg-[#282830]">
 			<input id="my-drawer" type="checkbox" className="drawer-toggle" />
@@ -33,6 +38,9 @@ const Drawer: React.FC = () => {
 					</li>
 					<li>
 						<a>Wallet 5</a>
+					</li>
+					<li onClick={connectWallet}>
+						<a>Connect Wallet</a>
 					</li>
 				</ul>
 			</div>

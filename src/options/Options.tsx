@@ -2,6 +2,7 @@ import { Route, Routes as RRRoutes } from 'react-router-dom'
 import Onboard from '~/options/components/Onboarding'
 import Landing from '~/options/components/Landing'
 import Recovery from '~/options/components/Recovery'
+import { Connect } from './components/Connect/Connect'
 
 const OptionsApp = () => {
   return (
@@ -11,6 +12,7 @@ const OptionsApp = () => {
           <Route path="/" element={<Landing />} />
           <Route path="/onboard" element={<Onboard />} />
           <Route path="/recovery" element={<Recovery />} />
+          <Route path='/connect' element={<Connect />} />
         </RRRoutes>
       </div>
     </div>
