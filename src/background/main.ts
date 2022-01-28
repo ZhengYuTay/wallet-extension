@@ -1,4 +1,4 @@
-import { sendMessage } from "webext-bridge";
+import { onMessage, sendMessage } from "webext-bridge";
 import { Tabs } from "webextension-polyfill";
 import browser from "webextension-polyfill";
 
@@ -42,6 +42,28 @@ browser.tabs.onActivated.addListener(async ({ tabId }) => {
     { context: "content-script", tabId }
   );
 });
+
+onMessage('connect-wallet', async () => {
+  browser.windows.create({
+    url: '/dist/options/index.html?popup=true',
+    width: 375,
+    height: 600,
+    type: 'popup',
+    focused: true,
+  });
+})
+
+// TODO: we might want to store something in the store to remember this user
+onMessage('wallet-connected', async () => {
+  // Close popup
+  browser.tabs.query({ active: true, windowType: 'popup' }).then(response => {
+    if (response.length && response[0].id) {
+      browser.tabs.remove(response[0].id)
+    }
+  })
+
+  // TODO: open extension here
+})
 
 // onMessage("get-current-tab", async () => {
 //   try {
