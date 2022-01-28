@@ -25,6 +25,7 @@
   "devDependencies": {
     "@ffflorian/jszip-cli": "^3.1.5",
     "@iconify/json": "^1.1.408",
+    "@types/chrome": "^0.0.177",
     "@types/fs-extra": "^9.0.13",
     "@types/node": "^16.10.2",
     "@types/react": "^17.0.33",
@@ -60,19 +61,24 @@
     "web-ext": "^6.4.0"
   },
   "dependencies": {
+    "@project-serum/anchor": "^0.20.1",
     "@solana/spl-token": "^0.1.8",
     "@solana/spl-token-registry": "^0.2.1219",
     "@solana/web3.js": "^1.30.2",
+    "bip39": "^3.0.4",
     "buffer": "^6.0.3",
     "classnames": "^2.3.1",
     "clipboard": "^2.0.8",
     "daisyui": "^1.21.0",
+    "date-fns": "^2.28.0",
     "jsbi": "^4.1.0",
     "mathjs": "^10.0.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-query": "^3.34.8",
     "react-router-dom": "6",
     "recharts": "^2.1.8",
+    "stream-browserify": "^3.0.0",
     "webext-bridge": "^5.0.0",
     "webextension-polyfill": "^0.8.0"
   }

@@ -1,6 +1,7 @@
 import React from 'react'
 import ClipboardJS from 'clipboard'
 import Title from '../Title'
+import { generateMnemonic } from 'bip39'
 interface SeedProps {
   onNext: () => void
 }
@@ -23,12 +24,17 @@ const Seed: React.FC<SeedProps> = ({ onNext }) => {
     new ClipboardJS('.btn')
   }, [])
 
+  const mnemonic = React.useMemo(() => generateMnemonic(), [])
+
   return (
     <>
-      <Title title="Secret Recovery Phrase" caption='This is the only way you will be able to recover your account. Please store it somewhere safe!' />
+      <Title
+        title="Secret Recovery Phrase"
+        caption="This is the only way you will be able to recover your account. Please store it somewhere safe!"
+      />
       <div className="bg-slate-500 p-4 relative rounded-md mt-6">
         <div className="text-lg" id="seed">
-          drip marriage celery half squirrel abuse music ceiling hand diesel evolve someone
+          {mnemonic}
         </div>
         <button
           className="btn btn-secondary btn-xs rounded-2 absolute right-4 -bottom-3"

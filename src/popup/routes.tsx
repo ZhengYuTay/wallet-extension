@@ -8,6 +8,7 @@ import Collection from '~/pages/collection'
 import Swap from '~/pages/swap'
 import Token from '~/pages/token'
 import Send from '~/pages/send'
+import SendToken from '~/pages/sendToken'
 
 const Routes: React.FunctionComponent = () => {
   return (
@@ -22,6 +23,7 @@ const Routes: React.FunctionComponent = () => {
         <Route path="/send" element={<Send />} />
         {/* TODO: maybe can set as nested routes */}
         <Route path="/wallet/:id" element={<Token />} />
+        <Route path="/send/:id" element={<SendToken />} />
       </RRRoutes>
     </BottomNavigation>
   )
