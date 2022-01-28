@@ -19,14 +19,18 @@ export default defineConfig({
     lib: {
       entry: r("src/contentScripts/index.tsx"),
       name: packageJson.name,
-      formats: ["iife"],
+      formats: ["es"],
     },
     rollupOptions: {
-      output: {
-        entryFileNames: "index.global.js",
-        extend: true,
+      input: {
+        index: r('src/contentScripts/index.tsx'),
+        script: r('src/contentScripts/script.js')
       },
-    },
+      output: {
+        entryFileNames: ({ name: fileName }) => `${fileName}.global.js`,
+        extend: true
+      }
+    }
   },
   plugins: [...sharedConfig.plugins!],
 });

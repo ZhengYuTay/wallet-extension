@@ -1,8 +1,9 @@
 /* eslint-disable no-console */
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { onMessage } from 'webext-bridge'
+import { onMessage, sendMessage } from 'webext-bridge'
 import browser from 'webextension-polyfill'
+import injectScript from './inject';
 import { ContentApp } from './views/ContentApp'
 
 // Firefox `browser.tabs.executeScript()` requires scripts return a primitive value
@@ -24,6 +25,12 @@ import { ContentApp } from './views/ContentApp'
   shadowDOM.appendChild(styleEl)
   shadowDOM.appendChild(root)
   // document.body.appendChild(container);
+
+  injectScript(browser.runtime.getURL('dist/contentScripts/script.global.js'), 'body');
+
+  window.addEventListener('jupiter-connect-wallet', () =>
+    sendMessage('connect-wallet', undefined)
+  )
 
   ReactDOM.render(
     <React.StrictMode>

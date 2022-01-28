@@ -10,9 +10,10 @@ if (import.meta.hot) {
   import("./contentScriptHMR");
 }
 
-browser.runtime.onInstalled.addListener((): void => {
+browser.runtime.onInstalled.addListener((res): void => {
   // eslint-disable-next-line no-console
   console.log("Extension installed");
+  console.log({res})
 });
 
 let previousTabId = 0;
@@ -44,11 +45,7 @@ browser.tabs.onActivated.addListener(async ({ tabId }) => {
 });
 
 onMessage('connect-wallet', async () => {
-    // TODO: can do a browser.storage.local check here for connected wallets
-		// TODO: close extension here
-
   browser.windows.create({
-    // TODO: change this url
     url: '/dist/options/index.html?popup=true',
     width: 375,
     height: 600,
@@ -57,6 +54,7 @@ onMessage('connect-wallet', async () => {
   });
 })
 
+// TODO: we might want to store something in the store do remember this user
 onMessage('wallet-connected', async () => {
   // Close popup
   browser.tabs.query({ active: true, windowType: 'popup' }).then(response => {
