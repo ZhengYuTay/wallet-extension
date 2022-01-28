@@ -4,13 +4,16 @@ import AutoImport from 'unplugin-auto-import/vite'
 import { r, port, isDev } from './scripts/utils'
 import react from '@vitejs/plugin-react'
 import viteSvgIcons from 'vite-plugin-svg-icons'
+import shimReact from 'vite-plugin-shim-react-pdf'
 
 export const sharedConfig: UserConfig = {
   root: r('src'),
   resolve: {
     alias: {
       '~/': `${r('src')}/`,
-      stream: 'stream-browserify'
+      process: 'process/browser',
+      stream: 'vite-compatible-readable-stream',
+      zlib: 'browserify-zlib'
     }
   },
   define: {
@@ -21,6 +24,7 @@ export const sharedConfig: UserConfig = {
     // React fast refresh doesn't work, cause injecting of preambleCode into index.html
     // TODO: fix it
     react({ fastRefresh: false }),
+    shimReact(),
     AutoImport({
       imports: [
         {
