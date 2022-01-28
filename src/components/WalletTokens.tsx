@@ -1,16 +1,13 @@
 import { u64 } from '@solana/spl-token'
 import { ENV, TokenInfo, TokenListProvider } from '@solana/spl-token-registry'
-import { clusterApiUrl, Connection, PublicKey } from '@solana/web3.js'
 import * as math from 'mathjs'
 import { useEffect, useState } from 'react'
+import { connection } from '~/constants/connection'
+import { DUMMY_PUBLIC_KEY } from '~/constants/wallet'
 import { getWalletTokens, TokenAccount } from '~/libs/tokens'
 
 export function tokenAmountToUiTokenAmount(amount: u64, decimals: number) {
-  return math
-    .chain(amount.toString())
-    .fix()
-    .divide(math.pow(10, decimals))
-    .done()
+  return math.chain(amount.toString()).fix().divide(math.pow(10, decimals)).done()
 }
 
 export default function WalletTokens() {
@@ -18,20 +15,20 @@ export default function WalletTokens() {
   const [tokenMap, setTokenMap] = useState<Map<string, TokenInfo>>(new Map())
 
   useEffect(() => {
-    new TokenListProvider().resolve().then(tokens => {
-      const tokenList = tokens.filterByChainId(ENV.MainnetBeta).getList();
+    new TokenListProvider().resolve().then((tokens) => {
+      const tokenList = tokens.filterByChainId(ENV.MainnetBeta).getList()
 
-      setTokenMap(tokenList.reduce((map, item) => {
-        map.set(item.address, item)
-        return map;
-      },new Map()))
-    });
+      setTokenMap(
+        tokenList.reduce((map, item) => {
+          map.set(item.address, item)
+          return map
+        }, new Map())
+      )
+    })
   }, [setTokenMap])
 
   useEffect(() => {
-    const connection = new Connection(clusterApiUrl('mainnet-beta'))
-    getWalletTokens(connection, new PublicKey('9zg3seAh4Er1Nz8GAuiciH437apxtzgUWBT8frhudevR'))
-      .then(setTokenAccounts)
+    getWalletTokens(connection, DUMMY_PUBLIC_KEY).then(setTokenAccounts)
   }, [])
 
   return (
@@ -40,8 +37,7 @@ export default function WalletTokens() {
         return (
           <div key={idx}>
             <img src={tokenMap.get(tokenAccount.info.mint.toBase58())?.logoURI} width="30" height="30" />
-            {tokenMap.get(tokenAccount.info.mint.toBase58())?.symbol}
-            {' '}
+            {tokenMap.get(tokenAccount.info.mint.toBase58())?.symbol}{' '}
             {tokenAmountToUiTokenAmount(
               tokenAccount.info.amount,
               tokenMap.get(tokenAccount.info.mint.toBase58())?.decimals ?? 0
