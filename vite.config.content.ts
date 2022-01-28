@@ -1,7 +1,8 @@
-import { defineConfig } from "vite";
-import { sharedConfig } from "./vite.config";
-import { r, isDev } from "./scripts/utils";
-import packageJson from "./package.json";
+import { defineConfig } from 'vite'
+import { sharedConfig } from './vite.config'
+import { r, isDev } from './scripts/utils'
+import packageJson from './package.json'
+import copy from 'rollup-plugin-copy'
 
 // bundling the content script using Vite
 export default defineConfig({
@@ -9,28 +10,35 @@ export default defineConfig({
   build: {
     watch: isDev
       ? {
-          include: [r("src/contentScripts/**/*"), r("src/components/**/*")],
+          include: [r('src/contentScripts/**/*'), r('src/components/**/*')]
         }
       : undefined,
-    outDir: r("extension/dist/contentScripts"),
+    outDir: r('extension/dist/contentScripts'),
     cssCodeSplit: false,
     emptyOutDir: false,
-    sourcemap: isDev ? "inline" : false,
+    sourcemap: isDev ? 'inline' : false,
     lib: {
-      entry: r("src/contentScripts/index.tsx"),
+      entry: r('src/contentScripts/index.tsx'),
       name: packageJson.name,
-      formats: ["es"],
+      formats: ['iife']
     },
     rollupOptions: {
-      input: {
-        index: r('src/contentScripts/index.tsx'),
-        script: r('src/contentScripts/script.js')
-      },
       output: {
-        entryFileNames: ({ name: fileName }) => `${fileName}.global.js`,
+        entryFileNames: 'index.global.js',
         extend: true
       }
     }
   },
-  plugins: [...sharedConfig.plugins!],
-});
+  plugins: [
+    ...sharedConfig.plugins!,
+    copy({
+      targets: [
+        {
+          src: r('src/contentScripts/script.js'),
+          dest: r('extension/dist/contentScripts')
+        }
+      ],
+      hook: 'writeBundle' // notice here
+    })
+  ]
+})

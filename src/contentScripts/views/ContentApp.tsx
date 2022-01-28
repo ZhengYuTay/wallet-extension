@@ -1,3 +1,3 @@
 export const ContentApp = () => {
-  return <div>Hey!</div>;
-};
+  return <div>Hey!</div>
+}
