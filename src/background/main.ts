@@ -53,7 +53,7 @@ onMessage('connect-wallet', async () => {
   });
 })
 
-// TODO: we might want to store something in the store do remember this user
+// TODO: we might want to store something in the store to remember this user
 onMessage('wallet-connected', async () => {
   // Close popup
   browser.tabs.query({ active: true, windowType: 'popup' }).then(response => {
