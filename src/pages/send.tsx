@@ -4,7 +4,6 @@ import Input from '~/components/Input'
 import Icon from '~/components/Icon'
 import ListItem from '~/components/ListItem'
 import useWeb3 from '~/hooks/useWeb3'
-import { tokenAmountToUiTokenAmount } from '~/utils/coin'
 import Coin from '~/components/Coin'
 import { useNavigate } from 'react-router-dom'
 
@@ -48,12 +47,7 @@ const Send: React.FunctionComponent = () => {
               key={`fund${index}`}
               title={tokenInfo.token?.symbol ?? 'N/A'}
               icon={<Coin icon={tokenInfo?.token?.logoURI} />}
-              rightSide={
-                <div className="text-right text-md text-slate-400">{`${tokenAmountToUiTokenAmount(
-                  tokenInfo.info.amount,
-                  tokenInfo.token?.decimals ?? 0
-                )}`}</div>
-              }
+              rightSide={<div className="text-right text-md text-slate-400">{`${tokenInfo.balance}`}</div>}
               onClick={() => goToSendToken(tokenInfo.info.mint.toBase58())}
             />
           ))}
