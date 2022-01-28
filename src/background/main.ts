@@ -10,10 +10,9 @@ if (import.meta.hot) {
   import("./contentScriptHMR");
 }
 
-browser.runtime.onInstalled.addListener((res): void => {
+browser.runtime.onInstalled.addListener((): void => {
   // eslint-disable-next-line no-console
   console.log("Extension installed");
-  console.log({res})
 });
 
 let previousTabId = 0;
