@@ -9,7 +9,8 @@ export const sharedConfig: UserConfig = {
   root: r('src'),
   resolve: {
     alias: {
-      '~/': `${r('src')}/`
+      '~/': `${r('src')}/`,
+      stream: 'vite-compatible-readable-stream'
     }
   },
   define: {

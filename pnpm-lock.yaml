@@ -53,6 +53,7 @@ specifiers:
   typescript: ^4.4.3
   unplugin-auto-import: ^0.4.8
   vite: ^2.6.2
+  vite-compatible-readable-stream: ^3.6.0
   vite-plugin-svg-icons: ^1.1.0
   web-ext: ^6.4.0
   webext-bridge: ^5.0.0
@@ -115,6 +116,7 @@ devDependencies:
   typescript: 4.5.2
   unplugin-auto-import: 0.4.14_vite@2.6.14
   vite: 2.6.14
+  vite-compatible-readable-stream: 3.6.0
   vite-plugin-svg-icons: 1.1.0_vite@2.6.14
   web-ext: 6.5.0
 
@@ -7008,6 +7010,15 @@ packages:
       assert-plus: 1.0.0
       core-util-is: 1.0.2
       extsprintf: 1.3.0
+    dev: true
+
+  /vite-compatible-readable-stream/3.6.0:
+    resolution: {integrity: sha512-A7PEC42vV49U4VyXEE9Ibx/damN8mghNnHmB5L65HlKktbrd4eXzhQurL9xkkFU5ttRPSxGum0m6i07AifVBFw==}
+    engines: {node: '>= 6'}
+    dependencies:
+      inherits: 2.0.4
+      string_decoder: 1.3.0
+      util-deprecate: 1.0.2
     dev: true
 
   /vite-plugin-svg-icons/1.1.0_vite@2.6.14:
