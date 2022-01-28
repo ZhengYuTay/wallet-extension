@@ -10,7 +10,7 @@ export const sharedConfig: UserConfig = {
   resolve: {
     alias: {
       '~/': `${r('src')}/`,
-      stream: 'vite-compatible-readable-stream'
+      stream: 'stream-browserify'
     }
   },
   define: {

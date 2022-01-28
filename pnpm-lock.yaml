@@ -77,7 +77,6 @@ dependencies:
   react-query: 3.34.8_react-dom@17.0.2+react@17.0.2
   react-router-dom: 6.2.1_react-dom@17.0.2+react@17.0.2
   recharts: 2.1.8_react-dom@17.0.2+react@17.0.2
-  stream-browserify: 3.0.0
   webext-bridge: 5.0.1
   webextension-polyfill: 0.8.0
 
@@ -112,6 +111,7 @@ devDependencies:
   npm-run-all: 4.1.5
   postcss: 8.4.5
   rimraf: 3.0.2
+  stream-browserify: 3.0.0
   tailwindcss: 3.0.8_cefe482e8d38053bbf3d5815e0c551b3
   typescript: 4.5.2
   unplugin-auto-import: 0.4.14_vite@2.6.14
@@ -6389,7 +6389,7 @@ packages:
     dependencies:
       inherits: 2.0.4
       readable-stream: 3.6.0
-    dev: false
+    dev: true
 
   /stream-to-array/2.3.0:
     resolution: {integrity: sha1-u/azn19D7DC8cbq8s3VXrOzzQ1M=}
