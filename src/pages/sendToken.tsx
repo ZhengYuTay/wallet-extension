@@ -1,5 +1,6 @@
 import { ASSOCIATED_TOKEN_PROGRAM_ID, Token, TOKEN_PROGRAM_ID, u64 } from '@solana/spl-token'
 import { PublicKey, Transaction, TransactionInstruction } from '@solana/web3.js'
+import { connect } from 'http2'
 import * as React from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import Coin from '~/components/Coin'
@@ -12,8 +13,8 @@ import { tokenAccountParser } from '~/libs/tokens'
 const SendToken: React.FC = () => {
   const { id } = useParams()
   const navigate = useNavigate()
-  const { connection, tokenInfoAccounts } = useWeb3()
   const { selectedWallet } = useWallet()
+  const { connection, tokenInfoAccounts } = useWeb3(selectedWallet?.publicKey)
 
   const [recipient, setRecipient] = React.useState<string>()
   const [amount, setAmount] = React.useState<string>()
@@ -85,7 +86,7 @@ const SendToken: React.FC = () => {
               } else {
                 instructions.push(
                   Token.createAssociatedTokenAccountInstruction(
-                    destination,
+                    ASSOCIATED_TOKEN_PROGRAM_ID,
                     TOKEN_PROGRAM_ID,
                     mint,
                     destination,
@@ -109,8 +110,10 @@ const SendToken: React.FC = () => {
               )
 
               const tx = new Transaction({ feePayer: selectedWallet.publicKey })
+              tx.instructions = instructions
+              tx.recentBlockhash = (await connection.getRecentBlockhash()).blockhash
               selectedWallet.signTransaction(tx)
-              const signature = await connection.sendTransaction(tx, [])
+              const signature = await connection.sendRawTransaction(tx.serialize())
               console.log('Sent token transfer, signature:', signature)
               // TODO: Go to monitor transaction
             }}
