@@ -20,6 +20,10 @@ const SendToken: React.FC = () => {
     setTokenAccount(tokenInfoAccounts?.find((tokenInfoAccount) => tokenInfoAccount.info.mint.toBase58() === id))
   }, [id, tokenInfoAccounts])
 
+  const gotToSendConfirm = React.useCallback((mint) => {
+    navigate(`/send/${mint}`)
+  }, [])
+
   return (
     <div className="flex flex-col h-full">
       <Header title={`Send ${tokenAccount?.token?.symbol}`} style={{ flex: '0 0' }} back />
@@ -43,7 +47,12 @@ const SendToken: React.FC = () => {
           <button className="btn w-[45%]" onClick={goBack}>
             Cancel
           </button>
-          <button className="btn btn-primary w-[45%]">Next</button>
+          <button
+            className="btn btn-primary w-[45%]"
+            onClick={() => gotToSendConfirm(`/send-confirm/${mint}/amount/${amount}/recipient/${recipient}`)}
+          >
+            Next
+          </button>
         </div>
       </div>
     </div>
