@@ -1,5 +1,6 @@
 import { validateMnemonic, wordlists } from 'bip39'
 import React, { useMemo, useState } from 'react'
+import { storeMnemonic } from '~/libs/cryptography/wallet-seed'
 import Title from '../Title'
 
 interface SeedProps {
@@ -8,12 +9,7 @@ interface SeedProps {
 
 const Seed: React.FC<SeedProps> = ({ onNext }) => {
   const [mnemonic, setMnemonic] = useState('')
-  const mnemonicValid = useMemo(() => {
-    console.log(wordlists.english)
-    const res = validateMnemonic(mnemonic, wordlists.english)
-    console.log(mnemonic, res)
-    return res
-  }, [mnemonic])
+  const mnemonicValid = useMemo(() => validateMnemonic(mnemonic), [mnemonic])
 
   return (
     <>
@@ -27,7 +23,14 @@ const Seed: React.FC<SeedProps> = ({ onNext }) => {
         onChange={(e) => setMnemonic(e.target.value)}
         rows={3}
       />
-      <button className="btn btn-block btn-primary mt-auto" disabled={!mnemonicValid} onClick={onNext}>
+      <button
+        className="btn btn-block btn-primary mt-auto"
+        disabled={!mnemonicValid}
+        onClick={() => {
+          storeMnemonic(mnemonic)
+          onNext()
+        }}
+      >
         Import Secret recovery phrase
       </button>
     </>

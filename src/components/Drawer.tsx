@@ -1,43 +1,44 @@
-import React from 'react';
-import Icon from './Icon';
+import React from 'react'
+import useWallet from '~/hooks/useWallet'
+import { shortenAddress } from '~/utils/web3-utils'
+import Icon from './Icon'
 
 const Drawer: React.FC = () => {
-	return (
-		<div className="shadow drawer bg-[#282830]">
-			<input id="my-drawer" type="checkbox" className="drawer-toggle" />
+  const { wallets, selectedWallet, setSelectedWalletByIndex } = useWallet()
 
-			<div className="px-4 pt-4 pb-8 border-b border-slate-700">
-				<label htmlFor="my-drawer" className="btn-primary drawer-button">
-					<Icon
-						className="cursor-pointer absolute"
-						name="drawer"
-						colorFn={({ hover }: { hover: Boolean }) => (hover ? 'white' : 'grey')}
-					/>
-				</label>
-			</div>
+  return (
+    <div className="shadow drawer bg-[#282830]">
+      <input id="my-drawer" type="checkbox" className="drawer-toggle" />
 
-			<div className="drawer-side">
-				<label htmlFor="my-drawer" className="drawer-overlay cursor-default h-screen z-10 absolute w-screen" />
-				<ul className="menu p-4 overflow-y-auto w-3/6 bg-base-100 text-base-content z-20 h-screen absolute">
-					<li>
-						<a>Wallet 1</a>
-					</li>
-					<li>
-						<a>Wallet 2</a>
-					</li>
-					<li>
-						<a>Wallet 3</a>
-					</li>
-					<li>
-						<a>Wallet 4</a>
-					</li>
-					<li>
-						<a>Wallet 5</a>
-					</li>
-				</ul>
-			</div>
-		</div>
-	);
-};
+      <div className="px-4 pt-4 pb-8 border-b border-slate-700">
+        <label htmlFor="my-drawer" className="btn-primary drawer-button">
+          <Icon
+            className="cursor-pointer absolute"
+            name="drawer"
+            colorFn={({ hover }: { hover: Boolean }) => (hover ? 'white' : 'grey')}
+          />
+        </label>
+        {selectedWallet && (
+          <div className="text-slate-400">
+            {selectedWallet.name} ({shortenAddress(selectedWallet.publicKey.toBase58())})
+          </div>
+        )}
+      </div>
 
-export default Drawer;
+      <div className="drawer-side">
+        <label htmlFor="my-drawer" className="drawer-overlay cursor-default h-screen z-10 absolute w-screen" />
+        <ul className="menu p-4 overflow-y-auto w-4/6 bg-base-100 text-base-content z-20 h-screen absolute">
+          {wallets.map((wallet, index) => (
+            <li key={index}>
+              <a onClick={() => setSelectedWalletByIndex(index)}>
+                {wallet.name} ({shortenAddress(wallet.publicKey.toBase58())})
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  )
+}
+
+export default Drawer

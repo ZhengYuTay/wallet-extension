@@ -2,12 +2,14 @@ import * as React from 'react'
 import { useNavigate } from 'react-router-dom'
 import Coin from '~/components/Coin'
 import ListItem from '~/components/ListItem'
+import useWallet from '~/hooks/useWallet'
 import useWeb3 from '~/hooks/useWeb3'
 import { tokenAmountToUiTokenAmount } from '~/utils/coin'
 
 const Wallet: React.FunctionComponent = () => {
   const navigate = useNavigate()
-  const { tokenInfoAccounts } = useWeb3()
+  const { selectedWallet } = useWallet()
+  const { tokenInfoAccounts } = useWeb3(selectedWallet?.publicKey)
 
   const goToSend = React.useCallback(() => {
     navigate('/send')

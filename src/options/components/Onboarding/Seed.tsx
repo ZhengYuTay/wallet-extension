@@ -2,6 +2,7 @@ import React from 'react'
 import ClipboardJS from 'clipboard'
 import Title from '../Title'
 import { generateMnemonic } from 'bip39'
+import { storeMnemonic } from '~/libs/cryptography/wallet-seed'
 interface SeedProps {
   onNext: () => void
 }
@@ -44,7 +45,13 @@ const Seed: React.FC<SeedProps> = ({ onNext }) => {
           {isCopied ? 'copied!' : 'copy'}
         </button>
       </div>
-      <button className="btn btn-primary w-full mt-auto" onClick={onNext}>
+      <button
+        className="btn btn-primary w-full mt-auto"
+        onClick={async () => {
+          await storeMnemonic(mnemonic)
+          onNext()
+        }}
+      >
         OK, I saved it somewhere
       </button>
     </>

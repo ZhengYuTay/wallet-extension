@@ -47,7 +47,7 @@ const useWeb3 = (wallet: PublicKey | undefined = MAIN_PUBLIC_KEY): Web3Props => 
 
   const retrieveWalletTokens = React.useCallback(async () => {
     setTokenAccounts(await getWalletTokens(connection, wallet))
-  }, [])
+  }, [connection, wallet])
 
   React.useEffect(() => {
     retrieveWalletTokens()

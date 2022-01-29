@@ -1,5 +1,11 @@
-import bip32 from 'bip32'
+/**
+ * /!\ This is a rough draft of what the mnemonic storage and abstraction will look like,
+ * there is no encryption or any security consideration yet.
+ */
+import { Keypair } from '@solana/web3.js'
 import { mnemonicToSeed, validateMnemonic } from 'bip39'
+import { derivePath } from 'ed25519-hd-key'
+import nacl from 'tweetnacl'
 
 export async function menomonicToSeed(mnemonic: string) {
   if (!validateMnemonic(mnemonic)) {
@@ -9,17 +15,30 @@ export async function menomonicToSeed(mnemonic: string) {
   return Buffer.from(seed).toString('hex')
 }
 
+// https://github.com/bitcoin/bips/blob/master/bip-0044.mediawiki m/44'/501'/account'/change/address_index
+export function getKeypairFromSeed(seed: string, walletIndex: number): Keypair {
+  const path44Change = `m/44'/501'/${walletIndex}'/0'`
+  const derivedSeed = derivePath(path44Change, seed).key
+  return Keypair.fromSecretKey(nacl.sign.keyPair.fromSeed(derivedSeed).secretKey)
+}
+
 // TODO: Encryption and better data structure to allow storage of "loaded" wallets on the derivation path
 
 export async function storeMnemonic(mnemonic: string) {
   return new Promise<void>((resolve) => {
     chrome.storage.local.set(
       {
-        wallet_extension_mnemonic: mnemonic
+        mnemonic
       },
       resolve
     )
   })
+}
+
+export async function loadMnemonic(): Promise<string | undefined> {
+  const { mnemonic } = await new Promise<any>((resolve) => chrome.storage.local.get('mnemonic', resolve))
+  console.log('==>', mnemonic)
+  return mnemonic
 }
 
 // TODO: Purge extension storage
