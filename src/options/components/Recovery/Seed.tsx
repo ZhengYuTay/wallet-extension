@@ -1,4 +1,4 @@
-import { validateMnemonic, wordlists } from 'bip39'
+import { validateMnemonic } from 'bip39'
 import React, { useMemo, useState } from 'react'
 import { storeMnemonic } from '~/libs/cryptography/wallet-seed'
 import Title from '../Title'
@@ -26,8 +26,8 @@ const Seed: React.FC<SeedProps> = ({ onNext }) => {
       <button
         className="btn btn-block btn-primary mt-auto"
         disabled={!mnemonicValid}
-        onClick={() => {
-          storeMnemonic(mnemonic)
+        onClick={async () => {
+          await storeMnemonic(mnemonic)
           onNext()
         }}
       >

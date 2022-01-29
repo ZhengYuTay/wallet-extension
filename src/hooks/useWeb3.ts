@@ -3,11 +3,12 @@ import { clusterApiUrl, ConfirmedSignatureInfo, Connection, PublicKey } from '@s
 import { getRecentTransactions, getWalletTokens, TokenAccount } from '~/libs/tokens'
 import { ENV, TokenInfo, TokenListProvider } from '@solana/spl-token-registry'
 import { useQuery } from 'react-query'
+import { tokenAmountToUiTokenAmount } from '~/utils/coin'
 
 const connection = new Connection(clusterApiUrl('mainnet-beta'))
 const MAIN_PUBLIC_KEY = new PublicKey('9zg3seAh4Er1Nz8GAuiciH437apxtzgUWBT8frhudevR')
 
-export type TokenInfoAccount = { token: TokenInfo | undefined } & TokenAccount
+export type TokenInfoAccount = { token: TokenInfo | undefined } & { balance: number } & TokenAccount
 
 interface Web3Props {
   connection: Connection
@@ -29,7 +30,12 @@ const useWeb3 = (wallet: PublicKey | undefined = MAIN_PUBLIC_KEY): Web3Props => 
   )
 
   const tokenInfoAccounts = React.useMemo(
-    () => tokenAccounts?.map((account) => ({ token: tokenMap.get?.(account.info.mint.toBase58()), ...account })) ?? [],
+    () =>
+      tokenAccounts?.map((account) => {
+        const token = tokenMap.get?.(account.info.mint.toBase58())
+
+        return { token, ...account, balance: tokenAmountToUiTokenAmount(account.info.amount, token?.decimals ?? 0) }
+      }) ?? [],
     [tokenAccounts, tokenMap]
   )
 
