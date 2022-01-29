@@ -1,6 +1,7 @@
 import { PublicKey } from '@solana/web3.js'
 import { formatDistanceToNowStrict } from 'date-fns'
 import * as React from 'react'
+import { useMemo } from 'react'
 import { useParams } from 'react-router-dom'
 import { Line, LineChart, ResponsiveContainer } from 'recharts'
 import Coin from '~/components/Coin'
@@ -54,8 +55,8 @@ const Token: React.FunctionComponent = () => {
     return <div className="flex flex-col">Something went wrong!</div>
   }
 
-  const { tokenMap } = useWeb3()
-  const { transactions } = useWeb3(new PublicKey(id))
+  const pk = useMemo(() => new PublicKey(id), [id])
+  const { transactions, tokenMap } = useWeb3(pk)
 
   const tokenInfo = React.useMemo(() => tokenMap.get(id), [tokenMap, id])
 
