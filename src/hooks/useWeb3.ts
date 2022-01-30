@@ -1,17 +1,16 @@
 import * as React from 'react'
-import { clusterApiUrl, ConfirmedSignatureInfo, Connection, PublicKey } from '@solana/web3.js'
+import { ConfirmedSignatureInfo, PublicKey } from '@solana/web3.js'
 import { getRecentTransactions, getWalletTokens, TokenAccount } from '~/libs/tokens'
 import { ENV, TokenInfo, TokenListProvider } from '@solana/spl-token-registry'
 import { useQuery } from 'react-query'
 import { tokenAmountToUiTokenAmount } from '~/utils/coin'
+import { useConnection } from './useConnection'
 
-const connection = new Connection(clusterApiUrl('mainnet-beta'))
 const MAIN_PUBLIC_KEY = new PublicKey('9zg3seAh4Er1Nz8GAuiciH437apxtzgUWBT8frhudevR')
 
 export type TokenInfoAccount = { token: TokenInfo | undefined } & { balance: number } & TokenAccount
 
 interface Web3Props {
-  connection: Connection
   tokenAccounts: TokenAccount[] | undefined
   tokenInfoAccounts: Array<TokenInfoAccount> | undefined
   transactions: ConfirmedSignatureInfo[] | undefined
@@ -19,8 +18,8 @@ interface Web3Props {
 }
 
 const useWeb3 = (wallet: PublicKey | undefined = MAIN_PUBLIC_KEY): Web3Props => {
+  const connection = useConnection()
   const [tokenAccounts, setTokenAccounts] = React.useState<TokenAccount[]>()
-  const [clusterConnection] = React.useState<Connection>(connection)
   const [tokenMap, setTokenMap] = React.useState<Map<string, TokenInfo>>(new Map())
   const { data: transactions = [] } = useQuery<ConfirmedSignatureInfo[]>(
     `${wallet.toString()}-transactions`,
@@ -63,7 +62,7 @@ const useWeb3 = (wallet: PublicKey | undefined = MAIN_PUBLIC_KEY): Web3Props => 
     getTokensMap()
   }, [getTokensMap])
 
-  return { connection: clusterConnection, tokenAccounts, tokenInfoAccounts, transactions, tokenMap }
+  return { tokenAccounts, tokenInfoAccounts, transactions, tokenMap }
 }
 
 export default useWeb3

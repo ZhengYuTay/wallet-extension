@@ -32,7 +32,7 @@ export const WalletProvider = ({ children }: { children: ReactChild }) => {
       }
       setSeed(await menomonicToSeed(mnemonic))
     })
-  })
+  }, [])
 
   const wallets = useMemo(() => {
     if (!seed) return []

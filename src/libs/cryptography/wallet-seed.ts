@@ -6,6 +6,7 @@ import { Keypair } from '@solana/web3.js'
 import { mnemonicToSeed, validateMnemonic } from 'bip39'
 import { derivePath } from 'ed25519-hd-key'
 import nacl from 'tweetnacl'
+import browser from 'webextension-polyfill'
 
 export async function menomonicToSeed(mnemonic: string) {
   if (!validateMnemonic(mnemonic)) {
@@ -23,20 +24,14 @@ export function getKeypairFromSeed(seed: string, walletIndex: number): Keypair {
 }
 
 // TODO: Encryption and better data structure to allow storage of "loaded" wallets on the derivation path
-
 export async function storeMnemonic(mnemonic: string) {
-  return new Promise<void>((resolve) => {
-    chrome.storage.local.set(
-      {
-        mnemonic
-      },
-      resolve
-    )
+  return browser.storage.local.set({
+    mnemonic
   })
 }
 
 export async function loadMnemonic(): Promise<string | undefined> {
-  const { mnemonic } = await new Promise<any>((resolve) => chrome.storage.local.get('mnemonic', resolve))
+  const { mnemonic } = await browser.storage.local.get('mnemonic')
   console.log('==>', mnemonic)
   return mnemonic
 }
