@@ -4,10 +4,12 @@ import { Popup } from './Popup'
 import { MemoryRouter } from 'react-router-dom'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { ReactQueryDevtools } from 'react-query/devtools'
+import { WalletProvider } from '~/contexts/wallet'
 
 import '../styles'
 
 import 'virtual:svg-icons-register'
+import { ConnectionProvider } from '~/contexts/connection'
 
 const queryClient = new QueryClient()
 
@@ -16,7 +18,11 @@ ReactDOM.render(
     <QueryClientProvider client={queryClient}>
       <ReactQueryDevtools initialIsOpen={false} />
       <MemoryRouter initialEntries={['/wallet']}>
-        <Popup />
+        <ConnectionProvider>
+          <WalletProvider>
+            <Popup />
+          </WalletProvider>
+        </ConnectionProvider>
       </MemoryRouter>
     </QueryClientProvider>
   </React.StrictMode>,
